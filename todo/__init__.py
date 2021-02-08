@@ -1,4 +1,4 @@
-import os
+qimport os
 
 from flask import Flask
 
@@ -16,7 +16,7 @@ def create_app():
     from . import db
 
     db.init_app(app)
-    
+
     @app.route('/hola')
     def hola():
         return 'Saludo inicial'
