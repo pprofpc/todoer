@@ -6,6 +6,10 @@ __pycache__/
 # C extensions
 *.so
 
+#Comentarios Propios
+misNotas/
+.mkd
+
 # Distribution / packaging
 .Python
 build/
