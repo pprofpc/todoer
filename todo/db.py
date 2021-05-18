@@ -1,9 +1,9 @@
 import mysql.connector
 
-import click
-from flask import current_app, g
-from flask.cli import with_appcontext
-from .schema  import instructions
+import click #ejecuta comandos en la terminal
+from flask import current_app, g #g es una variable Global, nosotros la utilizamos para almacenar el usurio
+from flask.cli import with_appcontext #sirve para acceder a las variables que se encuentran en la configuración de la aplicación
+from .schema  import instructions #va a tener los script necesarios para crear nuestra DB
 
 def get_db():
     if 'db' not in g:
@@ -30,7 +30,7 @@ def init_db():
 
     db.commit()
 
-@click.command('init_db')
+@click.command('init-db')
 @with_appcontext
 def init_db_command():
     init_db()
@@ -39,5 +39,6 @@ def init_db_command():
 
 def init_app(app):
     app.teardown_appcontext(close_db)
+    app.cli.add_command(init_db_command)
 
  
