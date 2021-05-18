@@ -8,7 +8,7 @@ __pycache__/
 
 #Comentarios Propios
 misNotas/
-.mkd
+*.mkd
 
 # Distribution / packaging
 .Python
