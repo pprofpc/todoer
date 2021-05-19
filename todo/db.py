@@ -30,7 +30,7 @@ def init_db():
 
     db.commit()
 
-@click.command('init-db')
+@click.command('init-db') #Nombre que voy a utilizar desde la terminal con flask
 @with_appcontext
 def init_db_command():
     init_db()
