@@ -1,3 +1,4 @@
+from os import error
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for
 )
@@ -63,6 +64,25 @@ def get_todo(id):
 @login_required
 def update(id):
     todo = get_todo(id)
+
+    if request.method == 'POST':
+        description = request.form['description']
+        completed = True if request.form.get('completed') == 'on' else False
+        error = None
+
+        if not description:
+            error = "La descripción es requerida."
+        
+        if error is not None:
+            flash(error)
+        else:
+            db, c = get_db()
+            c.execute(
+                'update todo set description = %s, completed = %s'
+                ' where id = %s', (description, completed,id)
+            )
+            db.commit()
+            return redirect(url_for('todo.index'))
     return render_template('todo/update.html', todo=todo)
     
 @bp.route('/<int:id>/delete',methods=['POST'])
